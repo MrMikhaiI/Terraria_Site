@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terraria - Главная</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        html, body { 
+            height: 100%; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+            background-image: url("images/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative; 
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            transition: background-color 0.3s; 
+            z-index: -1; 
+        }
+
+        body.dark-theme {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+
+        body.dark-theme::before {
+            background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой в темной теме */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img id="logo" src="images/logo.png" alt="Terraria Logo">
+            <h1>Добро пожаловать в мир Terraria!</h1>
+        </header>
+
+        <section class="main-content">
+            <img id="screenshot" src="images/screenshot.jpg" alt="Terraria Screenshot">
+            <p>Terraria - это 2D-платформер, в котором вы можете копать, сражаться, исследовать и строить! Мир ждет ваших приключений!</p>
+        </section>
+
+        <nav>
+            <a href="news.html">Новости</a>
+        </nav>
+
+        <button id="theme-toggle">Сменить тему</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const logo = document.getElementById('logo');
+
+          
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-theme');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-theme');
+                
+                if (body.classList.contains('dark-theme')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+
+             //Плавная прогрузка логотипа
+            logo.style.opacity = 0;  // Начальная прозрачность
+            setTimeout(() => {
+                logo.style.transition = 'opacity 1s ease-in-out';
+                logo.style.opacity = 1;  // Постепенное появление
+            }, 100); // Небольшая задержка перед началом анимации
+        });
+    </script>
+</body>
+</html>

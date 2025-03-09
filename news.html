@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terraria - Новости</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-theme {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+
+        .news-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff; /* Белый фон для светлой темы */
+            color: #333; 
+        }
+
+        body.dark-theme .news-item {
+            background-color: #444; /* Темный фон для темной темы */
+            color: #eee; 
+            border-color: #555; /* Более темная граница для темной темы */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Новости Terraria</h1>
+        </header>
+
+        <section class="news-item">
+            <h2>Обновление 1.4.4.9: "Labor of Love" уже здесь!</h2>
+            <p>Долгожданное обновление "Labor of Love" наконец-то вышло! Вас ждут новые предметы, изменения баланса и множество исправлений!</p>
+        </section>
+
+        <section class="news-item">
+            <h2>Terraria в Steam Summer Sale!</h2>
+            <p>Не упустите шанс купить Terraria со скидкой в Steam Summer Sale! Отличное время, чтобы начать или вернуться в игру!</p>
+        </section>
+
+        <section id="comments">
+            <h2>Комментарии</h2>
+            <div id="comment-list">
+                <!-- Здесь будут отображаться комментарии -->
+            </div>
+
+            <form id="comment-form">
+                <label for="name">Имя:</label>
+                <input type="text" id="name" name="name" required><br><br>
+
+                <label for="comment">Комментарий:</label>
+                <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br><br>
+
+                <button type="submit">Отправить</button>
+            </form>
+        </section>
+
+        <button id="theme-toggle">Сменить тему</button> 
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const themeToggle = document.getElementById('theme-toggle'); 
+
+            // Загрузка темы из localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-theme');
+            }
+
+            // Обработчик для кнопки
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-theme');
+                 // Сохранение темы в localStorage
+                if (body.classList.contains('dark-theme')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+
+            const commentForm = document.getElementById('comment-form');
+            const commentList = document.getElementById('comment-list');
+
+            commentForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Предотвращаем отправку формы
+
+                const name = document.getElementById('name').value;
+                const commentText = document.getElementById('comment').value;
+
+                // Создаем элемент для нового комментария
+                const newComment = document.createElement('div');
+                newComment.classList.add('comment');
+                newComment.innerHTML = `<strong>${name}:</strong><br>${commentText}<hr>`;
+
+                // Добавляем новый комментарий в список
+                commentList.appendChild(newComment);
+
+                // Очищаем форму
+                document.getElementById('name').value = '';
+                document.getElementById('comment').value = '';
+            });
+        });
+    </script>
+</body>
+</html>
