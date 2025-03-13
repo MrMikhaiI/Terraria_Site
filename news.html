@@ -9,16 +9,42 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
+        html, body { /* Добавлено:  Обязательно указывать высоту и для html */
+            height: 100%; /* Занимает всю высоту видимой области */
+            margin: 0; /*  Удалить стандартные отступы body  */
+        }
+
         body {
             font-family: 'Press Start 2P', cursive;
             background-color: #f0f0f0;
             color: #333;
             transition: background-color 0.3s, color 0.3s;
+            background-image: url("images/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
         }
 
         body.dark-theme {
             background-color: #333;
             color: #f0f0f0;
+        }
+
+        body.dark-theme::before {
+            background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой в темной теме */
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; /* Растягиваем на всю высоту body */
+            background-color: rgba(0, 0, 0, 0);
+            transition: background-color 0.3s;
+            z-index: -1;
         }
 
         .news-item {
@@ -27,19 +53,75 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             background-color: #fff; /* Белый фон для светлой темы */
-            color: #333; 
+            color: #333;
         }
 
         body.dark-theme .news-item {
             background-color: #444; /* Темный фон для темной темы */
-            color: #eee; 
+            color: #eee;
             border-color: #555; /* Более темная граница для темной темы */
         }
+
+        .container {
+    min-height: 85vh; /* Занимает всю высоту экрана */
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto; /* Прижимает footer к низу */
+    text-align: center;
+    padding: 10px;
+}
+/* Стили для кнопки */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Плавный переход */
+}
+
+button:hover {
+    background-color: #3e8e41;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+}
+
+/* Стили для ссылок */
+a {
+    color: #007bff; /* Цвет ссылки */
+    text-decoration: none; /* Убрать подчеркивание по умолчанию */
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+a:hover {
+    color: #0056b3; /* Изменить цвет при наведении */
+    text-decoration: underline; /* Добавить подчеркивание при наведении */
+}
+
+/* Общий стиль для элементов, которые нужно анимировать */
+.fade-in {
+    opacity: 0; /* Изначально скрываем элемент */
+    transform: translateY(20px); /* Сдвигаем элемент вниз */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Анимация */
+}
+
+/* Класс, который добавляется элементу, когда он должен появиться */
+.fade-in.active {
+    opacity: 1; /* Делаем элемент видимым */
+    transform: translateY(0); /* Возвращаем элемент на исходную позицию */
+}
     </style>
+
 </head>
 <body>
     <div class="container">
         <header>
+                <a href="index.html">
+                <img id="logo" src="images/logo.png" alt="Terraria Logo">
+            </a>
             <h1>Новости Terraria</h1>
         </header>
 
@@ -53,8 +135,10 @@
             <p>Не упустите шанс купить Terraria со скидкой в Steam Summer Sale! Отличное время, чтобы начать или вернуться в игру!</p>
         </section>
 
+        <section class="news-item">
         <section id="comments">
             <h2>Комментарии</h2>
+        </section>
             <div id="comment-list">
                 <!-- Здесь будут отображаться комментарии -->
             </div>
@@ -66,18 +150,26 @@
                 <label for="comment">Комментарий:</label>
                 <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br><br>
 
-                <button type="submit">Отправить</button>
+                <button class = "fade-in" type="submit">Отправить</button>
             </form>
         </section>
 
-        <button id="theme-toggle">Сменить тему</button> 
+        <button class = "fade-in" id="theme-toggle">Сменить тему</button> 
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const body = document.body;
             const themeToggle = document.getElementById('theme-toggle'); 
+            const logo = document.getElementById('logo');
+            const fadeInElements = document.querySelectorAll('.fade-in');
 
+            fadeInElements.forEach((element, index) => {
+        setTimeout(() => {
+            element.classList.add('active');
+        }, 100 * index); // Задержка увеличивается для каждого элемента
+    });
+    
             // Загрузка темы из localStorage
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
@@ -116,7 +208,17 @@
                 document.getElementById('name').value = '';
                 document.getElementById('comment').value = '';
             });
+            //Плавная прогрузка логотипа
+            logo.style.opacity = 0;  // Начальная прозрачность
+            setTimeout(() => {
+                logo.style.transition = 'opacity 1s ease-in-out';
+                logo.style.opacity = 1;  // Постепенное появление
+            }, 100); // Небольшая задержка перед началом анимации
         });
     </script>
+    <footer>
+        <p>&copy; 2025 Мой сайт о Terraria</p>
+        <a href="contactForm.html">Обратная связь</a>
+      </footer>
 </body>
 </html>

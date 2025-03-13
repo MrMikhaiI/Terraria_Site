@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>О Terraria - Узнайте больше об игре!</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #f0f0f0;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+    background-image: url("images/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.3s;
+    z-index: -1;
+}
+
+body.dark-theme {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+body.dark-theme::before {
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой в темной теме */
+}
+
+.container {
+    min-height: 100vh; /* Занимает всю высоту экрана */
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto; /* Прижимает footer к низу */
+    text-align: center;
+    padding: 10px;
+}
+
+/* Стили для кнопки */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Плавный переход */
+}
+
+button:hover {
+    background-color: #3e8e41;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+}
+
+/* Стили для ссылок */
+a {
+    color: #007bff; /* Цвет ссылки */
+    text-decoration: none; /* Убрать подчеркивание по умолчанию */
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+a:hover {
+    color: #0056b3; /* Изменить цвет при наведении */
+    text-decoration: underline; /* Добавить подчеркивание при наведении */
+}
+
+/* Общий стиль для элементов, которые нужно анимировать */
+.fade-in {
+    opacity: 0; /* Изначально скрываем элемент */
+    transform: translateY(20px); /* Сдвигаем элемент вниз */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Анимация */
+}
+
+/* Класс, который добавляется элементу, когда он должен появиться */
+.fade-in.active {
+    opacity: 1; /* Делаем элемент видимым */
+    transform: translateY(0); /* Возвращаем элемент на исходную позицию */
+}
+
+</style>
+</head>
+<body>
+<div class = "container">
+  <header>
+    <a href="index.html">  <!-- Ссылка на главную страницу -->
+      <img id="logo" src="images/logo.png" alt="Terraria Logo">
+    </a>
+    <h1>О Terraria</h1>
+  </header>
+
+  <main>
+    <section id="game-description">
+      <h2>Добро пожаловать в мир приключений и строительства!</h2>
+      <p>Terraria - это 2D-игра в жанре песочницы с элементами выживания и экшена, разработанная компанией Re-Logic.  В Terraria вы исследуете огромный процедурно-генерируемый мир, сражаетесь, собираете ресурсы, строите дома и создаете оружие и броню.</p>
+      <p>Игра предлагает широкий выбор занятий: от копания под землей в поисках сокровищ до строительства величественных замков и сражений с эпическими боссами.  Сражайтесь за выживание, исследуйте тайны мира и дайте волю своему творчеству!</p>
+
+      <h3>Ключевые особенности:</h3>
+      <ul>
+        <li>Огромный процедурно-генерируемый мир</li>
+        <li>Более 400 уникальных врагов</li>
+        <li>Более 20 NPC для взаимодействия</li>
+        <li>Сотни видов оружия, брони и других предметов</li>
+        <li>Система строительства и крафта</li>
+        <li>Возможность играть с друзьями в многопользовательском режиме</li>
+      </ul>
+    </section>
+
+    <section id="game-image">
+      <h2>Скриншот из игры</h2>
+      <img src="images/screenshot.jpg" alt="Скриншот Terraria" width="700">
+      <p class="caption">Один из моментов игры Terraria.</p>
+    </section>
+
+    <section id="game-video">
+      <h2>Короткий геймплейный ролик</h2>
+      <video width="640" height="360" controls>
+        <source src="videos/terraria_gameplay.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео HTML5.
+      </video>
+      <p class="caption">Короткий отрывок геймплея Terraria.</p>
+    </section>
+  </main>
+  <button class ="fade-in" id="theme-toggle">Сменить тему</button>
+</div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const themeToggle = document.getElementById('theme-toggle'); 
+            const logo = document.getElementById('logo');
+            const fadeInElements = document.querySelectorAll('.fade-in');
+
+            fadeInElements.forEach((element, index) => {
+        setTimeout(() => {
+            element.classList.add('active');
+        }, 100 * index); // Задержка увеличивается для каждого элемента
+    });
+
+            // Загрузка темы из localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-theme');
+            }
+
+            // Обработчик для кнопки
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-theme');
+                 // Сохранение темы в localStorage
+                if (body.classList.contains('dark-theme')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+    //Плавная прогрузка логотипа
+    logo.style.opacity = 0;  // Начальная прозрачность
+            setTimeout(() => {
+                logo.style.transition = 'opacity 1s ease-in-out';
+                logo.style.opacity = 1;  // Постепенное появление
+            }, 100); // Небольшая задержка перед началом анимации
+          });
+  </script>
+
+  <footer>
+    <p>&copy; 2025 Мой сайт о Terraria</p>
+    <a href="contactForm.html">Обратная связь</a>
+  </footer>
+
+</body>
+</html>

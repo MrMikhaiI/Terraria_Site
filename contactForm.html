@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Форма обратной связи</title>
+    <style>
+        body {
+    font-family: 'Press Start 2P', cursive;
+    margin: 20px;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Важно для правильной ширины */
+}
+
+textarea {
+    height: 150px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3e8e41;
+}
+
+#successMessage {  /* Исправлено:  ID, а не элемент message */
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    display: none; /* Скрываем сообщение по умолчанию */
+}
+
+.container {
+    min-height: 95vh; /* Занимает всю высоту экрана */
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto; /* Прижимает footer к низу */
+    text-align: center;
+    padding: 10px;
+}
+
+html, body {  /* Добавлено: Установка высоты для html и body */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Стили для кнопки */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Плавный переход */
+}
+
+button:hover {
+    background-color: #3e8e41;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+}
+
+/* Стили для ссылок */
+a {
+    color: #007bff; /* Цвет ссылки */
+    text-decoration: none; /* Убрать подчеркивание по умолчанию */
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+a:hover {
+    color: #0056b3; /* Изменить цвет при наведении */
+    text-decoration: underline; /* Добавить подчеркивание при наведении */
+}
+
+/* Общий стиль для элементов, которые нужно анимировать */
+.fade-in {
+    opacity: 0; /* Изначально скрываем элемент */
+    transform: translateY(20px); /* Сдвигаем элемент вниз */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Анимация */
+}
+
+/* Класс, который добавляется элементу, когда он должен появиться */
+.fade-in.active {
+    opacity: 1; /* Делаем элемент видимым */
+    transform: translateY(0); /* Возвращаем элемент на исходную позицию */
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+      <header>
+        <a href="index.html">
+          <img class ="fade-in" id="logo" src="images/logo.png" alt="Terraria Logo">
+        </a>
+      </header>
+  
+      <form id="contactForm">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" required>
+  
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+  
+        <label for="message">Сообщение:</label>
+        <textarea id="message" name="message" rows="4" required tabindex="0"></textarea>
+  
+        <button class="fade-in" type="submit">Отправить</button>
+  
+        <div id="successMessage" style="display: none;">Ваше сообщение отправлено. Скоро мы на него ответим!</div>
+      </form>
+  
+      <footer>
+        <p>&copy; 2025 Мой сайт о Terraria</p>
+      </footer>
+    </div>
+  
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        const fadeInElements = document.querySelectorAll('.fade-in');
+
+fadeInElements.forEach((element, index) => {
+setTimeout(() => {
+element.classList.add('active');
+}, 100 * index); // Задержка увеличивается для каждого элемента
+});
+        if (form && successMessage) {
+          form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+            successMessage.style.display = 'block'; // Показываем сообщение
+          });
+        } else {
+          console.error('Form or success message element not found!');
+        }
+
+      //Плавная прогрузка логотипа
+      logo.style.opacity = 0;  // Начальная прозрачность
+            setTimeout(() => {
+                logo.style.transition = 'opacity 1s ease-in-out';
+                logo.style.opacity = 1;  // Постепенное появление
+            }, 100); // Небольшая задержка перед началом анимации
+        });
+
+    </script>
+  </body>
+</html>

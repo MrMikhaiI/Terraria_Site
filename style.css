@@ -1,3 +1,15 @@
+p {
+    line-height: 1.6; /*  Увеличивает высоту строки в 1.6 раз по сравнению с нормальной */
+  }
+
+  h1, h2, h3 {
+  line-height: 1.4;
+}
+
+li {
+    line-height: 1.5;
+}
+
 body {
     font-family: 'Press Start 2P', cursive; 
     background-color: #f0f0f0;

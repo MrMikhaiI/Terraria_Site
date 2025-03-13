@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Галерея изображений</title>
+  <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+html, body { 
+            height: 100%; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+            background-image: url("images/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative; 
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            transition: background-color 0.3s; 
+            z-index: -1; 
+        }
+
+        body.dark-theme {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+
+        body.dark-theme::before {
+            background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой в темной теме */
+        }
+
+        .container {
+    min-height: 85vh; /* Занимает всю высоту экрана */
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto; /* Прижимает footer к низу */
+    text-align: center;
+    padding: 10px;
+}
+
+
+button:hover {
+    background-color: #3e8e41;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+}
+
+/* Стили для ссылок */
+a {
+    color: #007bff; /* Цвет ссылки */
+    text-decoration: none; /* Убрать подчеркивание по умолчанию */
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+a:hover {
+    color: #0056b3; /* Изменить цвет при наведении */
+    text-decoration: underline; /* Добавить подчеркивание при наведении */
+}
+
+/* Общий стиль для элементов, которые нужно анимировать */
+.fade-in {
+    opacity: 0; /* Изначально скрываем элемент */
+    transform: translateY(20px); /* Сдвигаем элемент вниз */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Анимация */
+}
+
+/* Класс, который добавляется элементу, когда он должен появиться */
+.fade-in.active {
+    opacity: 1; /* Делаем элемент видимым */
+    transform: translateY(0); /* Возвращаем элемент на исходную позицию */
+}
+
+    /* Стили для контейнера галереи */
+    .gallery-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    /* Стили для каждого элемента галереи */
+    .gallery-item {
+      width: 200px;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Стили для модального окна */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    /* Стили для содержимого модального окна */
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 80%;
+      max-height: 80%;
+    }
+
+    /* Стили для кнопки закрытия */
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <div class = "container">
+    <header>
+        <a href="index.html">
+        <img id="logo" src="images/logo.png" alt="Terraria Logo">
+    </a>
+    </header>    
+
+  <div class="gallery-container">
+    <div class="gallery-item">
+      <img src="images/img_gallery1.jpg" alt="Описание изображения 1" data-fullsize="images/img_gallery1.jpg">
+    </div>
+    <div class="gallery-item">
+      <img src="images/img_gallery2.jpg" alt="Описание изображения 2" data-fullsize="images/img_gallery2.jpg">
+    </div>
+    <div class="gallery-item">
+      <img src="images/img_gallery3.jpg" alt="Описание изображения 3" data-fullsize="images/img_gallery3.jpg">
+    </div>
+    <div class="gallery-item">
+        <img src="images/img_gallery4.jpg" alt="Описание изображения 4" data-fullsize="images/img_gallery4.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/img_gallery5.jpg" alt="Описание изображения 5" data-fullsize="images/img_gallery5.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/img_gallery6.jpg" alt="Описание изображения 6" data-fullsize="images/img_gallery6.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/img_gallery7.jpg" alt="Описание изображения 7" data-fullsize="images/img_gallery7.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/img_gallery8.jpg" alt="Описание изображения 8" data-fullsize="images/img_gallery8.jpg">
+      </div>
+      <!--Здесь повторяются картинки (сделано для заполнения галереи). В будущем можно вставить другие для разнообразия галереи--> 
+      <div class="gallery-item">
+        <img src="images/img_gallery1.jpg" alt="Описание изображения 1" data-fullsize="images/img_gallery1.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/img_gallery2.jpg" alt="Описание изображения 2" data-fullsize="images/img_gallery2.jpg">
+      </div>
+      <div class="gallery-item">
+        <img src="images/img_gallery3.jpg" alt="Описание изображения 3" data-fullsize="images/img_gallery3.jpg">
+      </div>
+      <div class="gallery-item">
+          <img src="images/img_gallery4.jpg" alt="Описание изображения 4" data-fullsize="images/img_gallery4.jpg">
+        </div>
+        <div class="gallery-item">
+          <img src="images/img_gallery5.jpg" alt="Описание изображения 5" data-fullsize="images/img_gallery5.jpg">
+        </div>
+        <div class="gallery-item">
+          <img src="images/img_gallery6.jpg" alt="Описание изображения 6" data-fullsize="images/img_gallery6.jpg">
+        </div>
+        <div class="gallery-item">
+          <img src="images/img_gallery7.jpg" alt="Описание изображения 7" data-fullsize="images/img_gallery7.jpg">
+        </div>
+        <div class="gallery-item">
+          <img src="images/img_gallery8.jpg" alt="Описание изображения 8" data-fullsize="images/img_gallery8.jpg">
+        </div>
+  </div>
+
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-img">
+    <div id="caption"></div>
+  </div>
+</div>
+  <script>
+    // Получаем элементы DOM
+    const images = document.querySelectorAll('.gallery-item img');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const captionText = document.getElementById('caption');
+    const closeBtn = document.querySelector('.close');
+    const logo = document.getElementById('logo');
+
+    // Функция открытия модального окна
+    function openModal(img) {
+      modal.style.display = "block";
+      modalImg.src = img.dataset.fullsize;
+      captionText.innerHTML = img.alt;
+    }
+
+    // Обработчик кликов по миниатюрам
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        openModal(img);
+      });
+    });
+
+    // Обработчик клика по кнопке закрытия
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = "none";
+    });
+
+    // Закрытие модального окна при клике вне изображения
+    window.addEventListener('click', (event) => {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    });
+     //Плавная прогрузка логотипа
+     logo.style.opacity = 0;  // Начальная прозрачность
+            setTimeout(() => {
+                logo.style.transition = 'opacity 1s ease-in-out';
+                logo.style.opacity = 1;  // Постепенное появление
+            }, 100); // Небольшая задержка перед началом анимации
+        
+  </script>
+<footer>
+    <p>&copy; 2025 Мой сайт о Terraria</p>
+    <a href="contactForm.html">Обратная связь</a>
+  </footer>
+</body>
+</html>

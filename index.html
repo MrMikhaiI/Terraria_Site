@@ -47,25 +47,81 @@
         body.dark-theme::before {
             background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой в темной теме */
         }
+
+        .container {
+    min-height: 85vh; /* Занимает всю высоту экрана */
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto; /* Прижимает footer к низу */
+    text-align: center;
+    padding: 10px;
+}
+
+button:hover {
+    background-color: #3e8e41;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+}
+
+/* Стили для ссылок */
+a {
+    color: #007bff; /* Цвет ссылки */
+    text-decoration: none; /* Убрать подчеркивание по умолчанию */
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+a:hover {
+    color: #0056b3; /* Изменить цвет при наведении */
+    text-decoration: underline; /* Добавить подчеркивание при наведении */
+}
+
+/* Общий стиль для элементов, которые нужно анимировать */
+.fade-in {
+    opacity: 0; /* Изначально скрываем элемент */
+    transform: translateY(20px); /* Сдвигаем элемент вниз */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Анимация */
+}
+
+/* Класс, который добавляется элементу, когда он должен появиться */
+.fade-in.active {
+    opacity: 1; /* Делаем элемент видимым */
+    transform: translateY(0); /* Возвращаем элемент на исходную позицию */
+}
     </style>
 </head>
 <body>
     <div class="container">
         <header>
+            <a href="index.html">
             <img id="logo" src="images/logo.png" alt="Terraria Logo">
+        </a>
             <h1>Добро пожаловать в мир Terraria!</h1>
         </header>
 
         <section class="main-content">
-            <img id="screenshot" src="images/screenshot.jpg" alt="Terraria Screenshot">
-            <p>Terraria - это 2D-платформер, в котором вы можете копать, сражаться, исследовать и строить! Мир ждет ваших приключений!</p>
+           
+            <h3>Terraria - это 2D-платформер, в котором вы можете копать, сражаться, исследовать и строить! Мир ждет ваших приключений!</h3>
         </section>
 
         <nav>
-            <a href="news.html">Новости</a>
+            <a class = "fade-in" href="news.html">Новости</a>
         </nav>
 
-        <button id="theme-toggle">Сменить тему</button>
+        <nav>
+            <a class = "fade-in" href="about.html">Узнать больше об игре</a>
+        </nav>
+
+        <nav>
+            <a class ="fade-in" href="galleryImages.html">Галерея изображений</a>
+        </nav>
+
+        <nav>
+            <a class ="fade-in" href="FAQ.html">Часто задаваемые вопросы</a>
+        </nav>
+
+        <button class ="fade-in" id="theme-toggle">Сменить тему</button>
     </div>
 
     <script>
@@ -73,7 +129,13 @@
             const themeToggle = document.getElementById('theme-toggle');
             const body = document.body;
             const logo = document.getElementById('logo');
+            const fadeInElements = document.querySelectorAll('.fade-in');
 
+fadeInElements.forEach((element, index) => {
+setTimeout(() => {
+element.classList.add('active');
+}, 100 * index); // Задержка увеличивается для каждого элемента
+});
           
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
@@ -97,6 +159,25 @@
                 logo.style.opacity = 1;  // Постепенное появление
             }, 100); // Небольшая задержка перед началом анимации
         });
+
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Предотвращаем отправку формы по умолчанию
+
+            // Показываем сообщение об успешной отправке
+            document.getElementById('message').style.display = 'block';
+
+            // Сбрасываем поля формы (необязательно)
+            document.getElementById('contactForm').reset();
+
+            // Скрываем сообщение через 3 секунды (опционально)
+            setTimeout(function() {
+                document.getElementById('message').style.display = 'none';
+            }, 3000);
+        });
     </script>
+    <footer>
+        <p>&copy; 2025 Мой сайт о Terraria</p>
+        <a href="contactForm.html">Обратная связь</a>
+      </footer>
 </body>
 </html>
