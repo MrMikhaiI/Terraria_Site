@@ -29,7 +29,7 @@ html, body {
 
         body::before {
             content: "";
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -68,7 +68,7 @@ button:hover {
 
 /* Стили для ссылок */
 a {
-    color: #007bff; /* Цвет ссылки */
+    color: #3e8e41; /* Цвет ссылки */
     text-decoration: none; /* Убрать подчеркивание по умолчанию */
     transition: color 0.3s, text-decoration 0.3s;
 }
@@ -159,7 +159,8 @@ a:hover {
     <header>
         <a href="index.html">
         <img id="logo" src="images/logo.png" alt="Terraria Logo">
-    </a>
+      </a>
+        <h1>Галерея изображений</h1>
     </header>    
 
   <div class="gallery-container">
@@ -212,6 +213,7 @@ a:hover {
         <div class="gallery-item">
           <img src="images/img_gallery8.jpg" alt="Описание изображения 8" data-fullsize="images/img_gallery8.jpg">
         </div>
+        
   </div>
 
   <div id="modal" class="modal">
@@ -219,6 +221,7 @@ a:hover {
     <img class="modal-content" id="modal-img">
     <div id="caption"></div>
   </div>
+  <button class ="fade-in" id="theme-toggle">Сменить тему</button>
 </div>
   <script>
     // Получаем элементы DOM
@@ -228,7 +231,30 @@ a:hover {
     const captionText = document.getElementById('caption');
     const closeBtn = document.querySelector('.close');
     const logo = document.getElementById('logo');
+    const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const fadeInElements = document.querySelectorAll('.fade-in');
 
+            fadeInElements.forEach((element, index) => {
+setTimeout(() => {
+element.classList.add('active');
+}, 100 * index); // Задержка увеличивается для каждого элемента
+});
+          
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-theme');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-theme');
+                
+                if (body.classList.contains('dark-theme')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            });
     // Функция открытия модального окна
     function openModal(img) {
       modal.style.display = "block";
@@ -262,9 +288,9 @@ a:hover {
             }, 100); // Небольшая задержка перед началом анимации
         
   </script>
-<footer>
+  <footer>
+    <nav><a href="contactForm.html">Обратная связь</a></nav>
     <p>&copy; 2025 Мой сайт о Terraria</p>
-    <a href="contactForm.html">Обратная связь</a>
   </footer>
 </body>
 </html>

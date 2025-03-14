@@ -10,84 +10,99 @@
   <title>FAQ</title>
   <style>
     html, body { 
-            height: 100%; 
-            margin: 0; 
-            padding: 0; 
-        }
+        height: 100%; 
+        margin: 0; 
+        padding: 0; 
+    }
 
-        body {
-            font-family: 'Press Start 2P', cursive;
-            background-color: #f0f0f0;
-            color: #333;
-            transition: background-color 0.3s, color 0.3s;
-            background-image: url("images/background.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            position: relative; 
-        }
+    body {
+        font-family: 'Press Start 2P', cursive;
+        background-color: #f0f0f0;
+        color: #333;
+        transition: background-color 0.3s, color 0.3s;
+        background-image: url("images/background.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        position: relative; 
+    }
 
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0);
-            transition: background-color 0.3s; 
-            z-index: -1; 
-        }
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0);
+        transition: background-color 0.3s; 
+        z-index: -1; 
+    }
 
-        body.dark-theme {
-            background-color: #333;
-            color: #f0f0f0;
-        }
+    body.dark-theme {
+        background-color: #333;
+        color: #f0f0f0;
+    }
 
-        body.dark-theme::before {
-            background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой в темной теме */
-        }
+    body.dark-theme::before {
+        background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой в темной теме */
+    }
 
-        .container {
-    min-height: 85vh; /* Занимает всю высоту экрана */
-    display: flex;
-    flex-direction: column;
+    .FAQ-item {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff; /* Белый фон для светлой темы */
+        color: #333;
+    }
+
+    body.dark-theme .FAQ-item {
+        background-color: #444; /* Темный фон для темной темы */
+        color: #eee;
+        border-color: #555; /* Более темная граница для темной темы */
+    }
+
+    .container {
+min-height: 85vh; /* Занимает всю высоту экрана */
+display: flex;
+flex-direction: column;
 }
 
 footer {
-    margin-top: auto; /* Прижимает footer к низу */
-    text-align: center;
-    padding: 10px;
+margin-top: auto; /* Прижимает footer к низу */
+text-align: center;
+padding: 10px;
 }
 
 button:hover {
-    background-color: #3e8e41;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+background-color: #3e8e41;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень при наведении */
 }
 
 /* Стили для ссылок */
 a {
-    color: #007bff; /* Цвет ссылки */
-    text-decoration: none; /* Убрать подчеркивание по умолчанию */
-    transition: color 0.3s, text-decoration 0.3s;
+color: #3e8e41; /* Цвет ссылки */
+text-decoration: none; /* Убрать подчеркивание по умолчанию */
+transition: color 0.3s, text-decoration 0.3s;
 }
 
 a:hover {
-    color: #0056b3; /* Изменить цвет при наведении */
-    text-decoration: underline; /* Добавить подчеркивание при наведении */
+color: #0056b3; /* Изменить цвет при наведении */
+text-decoration: underline; /* Добавить подчеркивание при наведении */
 }
 
 /* Общий стиль для элементов, которые нужно анимировать */
 .fade-in {
-    opacity: 0; /* Изначально скрываем элемент */
-    transform: translateY(20px); /* Сдвигаем элемент вниз */
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Анимация */
+opacity: 0; /* Изначально скрываем элемент */
+transform: translateY(20px); /* Сдвигаем элемент вниз */
+transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Анимация */
 }
 
 /* Класс, который добавляется элементу, когда он должен появиться */
 .fade-in.active {
-    opacity: 1; /* Делаем элемент видимым */
-    transform: translateY(0); /* Возвращаем элемент на исходную позицию */
+opacity: 1; /* Делаем элемент видимым */
+transform: translateY(0); /* Возвращаем элемент на исходную позицию */
 }
 
     /* Стили для секции FAQ */
@@ -142,10 +157,10 @@ a:hover {
     <a href="index.html">
     <img id="logo" src="images/logo.png" alt="Terraria Logo">
     </a>
+    <h1>Часто задаваемые вопросы</h1>
   </header>
-  <section class="faq-section">
-    <h2>Часто задаваемые вопросы</h2>
-
+    
+    <section class="faq-section">
     <div class="faq-item">
       <h3 class="faq-question">Вопрос 1: Как начать играть в Terraria?</h3>
       <div class="faq-answer">
@@ -169,6 +184,7 @@ a:hover {
 
     <!-- Добавьте больше вопросов и ответов по аналогии -->
   </section>
+  <button class ="fade-in" id="theme-toggle">Сменить тему</button>
 </div>
   <script>
     const faqQuestions = document.querySelectorAll('.faq-question');
@@ -221,9 +237,9 @@ element.classList.add('active');
         });
       });
     </script>
-    <footer>
-        <p>&copy; 2025 Мой сайт о Terraria</p>
-        <a href="contactForm.html">Обратная связь</a>
-      </footer>
+  <footer>
+    <nav><a href="contactForm.html">Обратная связь</a></nav>
+    <p>&copy; 2025 Мой сайт о Terraria</p>
+  </footer>
 </body>
 </html>

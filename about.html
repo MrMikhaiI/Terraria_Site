@@ -10,98 +10,101 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
   <style>
-    html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
+    html, body { 
+        height: 100%; 
+        margin: 0; 
+        padding: 0; 
+    }
 
-body {
-    font-family: 'Press Start 2P', cursive;
-    background-color: #f0f0f0;
-    color: #333;
-    transition: background-color 0.3s, color 0.3s;
-    background-image: url("images/background.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    position: relative;
-}
+    body {
+        font-family: 'Press Start 2P', cursive;
+        background-color: #f0f0f0;
+        color: #333;
+        transition: background-color 0.3s, color 0.3s;
+        background-image: url("images/background.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        position: relative; 
+    }
 
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0);
-    transition: background-color 0.3s;
-    z-index: -1;
-}
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0);
+        transition: background-color 0.3s; 
+        z-index: -1; 
+    }
 
-body.dark-theme {
-    background-color: #333;
-    color: #f0f0f0;
-}
+    body.dark-theme {
+        background-color: #333;
+        color: #f0f0f0;
+    }
 
-body.dark-theme::before {
-    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой в темной теме */
-}
+    body.dark-theme::before {
+        background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой в темной теме */
+    }
 
-.container {
-    min-height: 100vh; /* Занимает всю высоту экрана */
-    display: flex;
-    flex-direction: column;
+    .about-item {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff; /* Белый фон для светлой темы */
+        color: #333;
+    }
+
+    body.dark-theme .about-item {
+        background-color: #444; /* Темный фон для темной темы */
+        color: #eee;
+        border-color: #555; /* Более темная граница для темной темы */
+    }
+
+    .container {
+min-height: 85vh; /* Занимает всю высоту экрана */
+display: flex;
+flex-direction: column;
 }
 
 footer {
-    margin-top: auto; /* Прижимает footer к низу */
-    text-align: center;
-    padding: 10px;
-}
-
-/* Стили для кнопки */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s; /* Плавный переход */
+margin-top: auto; /* Прижимает footer к низу */
+text-align: center;
+padding: 10px;
 }
 
 button:hover {
-    background-color: #3e8e41;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+background-color: #3e8e41;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень при наведении */
 }
 
 /* Стили для ссылок */
 a {
-    color: #007bff; /* Цвет ссылки */
-    text-decoration: none; /* Убрать подчеркивание по умолчанию */
-    transition: color 0.3s, text-decoration 0.3s;
+color: #3e8e41; /* Цвет ссылки */
+text-decoration: none; /* Убрать подчеркивание по умолчанию */
+transition: color 0.3s, text-decoration 0.3s;
 }
 
 a:hover {
-    color: #0056b3; /* Изменить цвет при наведении */
-    text-decoration: underline; /* Добавить подчеркивание при наведении */
+color: #0056b3; /* Изменить цвет при наведении */
+text-decoration: underline; /* Добавить подчеркивание при наведении */
 }
 
 /* Общий стиль для элементов, которые нужно анимировать */
 .fade-in {
-    opacity: 0; /* Изначально скрываем элемент */
-    transform: translateY(20px); /* Сдвигаем элемент вниз */
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Анимация */
+opacity: 0; /* Изначально скрываем элемент */
+transform: translateY(20px); /* Сдвигаем элемент вниз */
+transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Анимация */
 }
 
 /* Класс, который добавляется элементу, когда он должен появиться */
 .fade-in.active {
-    opacity: 1; /* Делаем элемент видимым */
-    transform: translateY(0); /* Возвращаем элемент на исходную позицию */
+opacity: 1; /* Делаем элемент видимым */
+transform: translateY(0); /* Возвращаем элемент на исходную позицию */
 }
-
 </style>
 </head>
 <body>
@@ -112,9 +115,9 @@ a:hover {
     </a>
     <h1>О Terraria</h1>
   </header>
-
-  <main>
+  <section class ="about-item">
     <section id="game-description">
+      <!-- <section class="news-item"> -->
       <h2>Добро пожаловать в мир приключений и строительства!</h2>
       <p>Terraria - это 2D-игра в жанре песочницы с элементами выживания и экшена, разработанная компанией Re-Logic.  В Terraria вы исследуете огромный процедурно-генерируемый мир, сражаетесь, собираете ресурсы, строите дома и создаете оружие и броню.</p>
       <p>Игра предлагает широкий выбор занятий: от копания под землей в поисках сокровищ до строительства величественных замков и сражений с эпическими боссами.  Сражайтесь за выживание, исследуйте тайны мира и дайте волю своему творчеству!</p>
@@ -128,14 +131,19 @@ a:hover {
         <li>Система строительства и крафта</li>
         <li>Возможность играть с друзьями в многопользовательском режиме</li>
       </ul>
+    <!-- </section> -->
     </section>
+  </section>
 
+<section class="about-item">
     <section id="game-image">
       <h2>Скриншот из игры</h2>
       <img src="images/screenshot.jpg" alt="Скриншот Terraria" width="700">
       <p class="caption">Один из моментов игры Terraria.</p>
     </section>
+  </section>
 
+  <section class="about-item">
     <section id="game-video">
       <h2>Короткий геймплейный ролик</h2>
       <video width="640" height="360" controls>
@@ -144,7 +152,8 @@ a:hover {
       </video>
       <p class="caption">Короткий отрывок геймплея Terraria.</p>
     </section>
-  </main>
+  </section>
+
   <button class ="fade-in" id="theme-toggle">Сменить тему</button>
 </div>
   <script>
@@ -186,8 +195,8 @@ a:hover {
   </script>
 
   <footer>
+    <nav><a href="contactForm.html">Обратная связь</a></nav>
     <p>&copy; 2025 Мой сайт о Terraria</p>
-    <a href="contactForm.html">Обратная связь</a>
   </footer>
 
 </body>

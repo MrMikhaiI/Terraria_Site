@@ -48,6 +48,21 @@
             background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой в темной теме */
         }
 
+        .index-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff; /* Белый фон для светлой темы */
+            color: #333;
+        }
+
+        body.dark-theme .index-item {
+            background-color: #444; /* Темный фон для темной темы */
+            color: #eee;
+            border-color: #555; /* Более темная граница для темной темы */
+        }
+
         .container {
     min-height: 85vh; /* Занимает всю высоту экрана */
     display: flex;
@@ -67,7 +82,7 @@ button:hover {
 
 /* Стили для ссылок */
 a {
-    color: #007bff; /* Цвет ссылки */
+    color: #3e8e41; /* Цвет ссылки */
     text-decoration: none; /* Убрать подчеркивание по умолчанию */
     transition: color 0.3s, text-decoration 0.3s;
 }
@@ -100,10 +115,11 @@ a:hover {
             <h1>Добро пожаловать в мир Terraria!</h1>
         </header>
 
+        <section class = "index-item">
         <section class="main-content">
-           
             <h3>Terraria - это 2D-платформер, в котором вы можете копать, сражаться, исследовать и строить! Мир ждет ваших приключений!</h3>
         </section>
+    </section>
 
         <nav>
             <a class = "fade-in" href="news.html">Новости</a>
@@ -176,8 +192,9 @@ element.classList.add('active');
         });
     </script>
     <footer>
+        <nav><a href="contactForm.html">Обратная связь</a></nav>
+        
         <p>&copy; 2025 Мой сайт о Terraria</p>
-        <a href="contactForm.html">Обратная связь</a>
       </footer>
 </body>
 </html>
