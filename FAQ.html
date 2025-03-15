@@ -48,7 +48,7 @@
         background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой в темной теме */
     }
 
-    .FAQ-item {
+    .faq-item {
         margin-bottom: 20px;
         padding: 15px;
         border: 1px solid #ddd;
@@ -57,7 +57,7 @@
         color: #333;
     }
 
-    body.dark-theme .FAQ-item {
+    body.dark-theme .faq-item {
         background-color: #444; /* Темный фон для темной темы */
         color: #eee;
         border-color: #555; /* Более темная граница для темной темы */
@@ -110,9 +110,9 @@ transform: translateY(0); /* Возвращаем элемент на исход
       max-width: 800px;
       margin: 0 auto;
       padding: 20px;
-      border: 1px solid #ddd;
+      /* border: 1px solid #ddd; */
       border-radius: 8px;
-      background-color: #f9f9f9;
+      /* background-color: #f9f9f9; */
     }
 
     /* Стили для заголовков вопросов */
@@ -149,6 +149,28 @@ transform: translateY(0); /* Возвращаем элемент на исход
     .faq-answer p {
       margin-bottom: 0;
     }
+    body.dark .faq-section {
+    background-color: #333;
+    color: #fff;
+}
+
+body.dark-theme .faq-item {
+    border-bottom: 1px solid #555; /* Darker border */
+}
+
+body.dark-theme .faq-question {
+    background-color: #444; /* Darker background for questions */
+    color: #fff;
+}
+
+body.dark-theme .faq-question:hover {
+    background-color: #555; /* Darker hover background */
+}
+
+body.dark-theme .faq-answer {
+    background-color: #222; /* Even darker background for answers */
+    color: #fff;
+}
   </style>
 </head>
 <body>
@@ -166,16 +188,16 @@ transform: translateY(0); /* Возвращаем элемент на исход
       <div class="faq-answer">
         <p>Ответ 1: Срубите деревья, соберите ресурсы, сделайте верстак и дом для NPC.</p>
       </div>
-    </div>
+    
 
-    <div class="faq-item">
+    
       <h3 class="faq-question">Вопрос 2: Как построить дом для NPC?</h3>
       <div class="faq-answer">
         <p>Ответ 2: Нужна комната с стенами, полом, источником света, мебелью и дверью.</p>
       </div>
-    </div>
+   
 
-    <div class="faq-item">
+    
       <h3 class="faq-question">Вопрос 3: Как победить первого босса?</h3>
       <div class="faq-answer">
         <p>Ответ 3:  Соберите хорошую броню и оружие. Постройте арену и используйте зелья.</p>

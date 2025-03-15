@@ -8,121 +8,167 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>Форма обратной связи</title>
-    <style>
-        body {
-    font-family: 'Press Start 2P', cursive;
-    margin: 20px;
-}
+  <style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
 
-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+    body {
+        font-family: 'Press Start 2P', cursive;
+        background-color: #f0f0f0;
+        color: #333;
+        transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход для фона и текста */
+        background-image: url("images/background.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        position: relative;
+    }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-}
+    /* Псевдоэлемент для затемнения фона */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0); /* Изначально прозрачный белый */
+        transition: background-color 0.3s ease; /* Плавный переход для фона */
+        z-index: -1;
+    }
 
-input[type="text"],
-input[type="email"],
-textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Важно для правильной ширины */
-}
+    /* Стили для темной темы */
+    body.dark-theme {
+        background-color: #222; /* Более темный фон */
+        color: #eee; /* Светлый текст */
+    }
 
-textarea {
-    height: 150px;
-}
+    /* Затемнение фона в темной теме */
+    body.dark-theme::before {
+        background-color: rgba(0, 0, 0, 0.6); /* Более сильное затемнение */
+    }
 
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+    /* Общие стили для элементов contact */
+    .contact-item {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff; /* Белый фон для светлой темы */
+        color: #333;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Плавный переход */
+    }
 
-button:hover {
-    background-color: #3e8e41;
-}
+    /* Стили для .contact-item в темной теме */
+    body.dark-theme .contact-item {
+        background-color: #333; /* Темный фон для темной темы */
+        color: #eee; /* Светлый текст */
+        border-color: #555; /* Более темная граница для темной темы */
+    }
 
-#successMessage {  /* Исправлено:  ID, а не элемент message */
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-    border-radius: 4px;
-    display: none; /* Скрываем сообщение по умолчанию */
-}
+    /* Контейнер */
+    .container {
+        min-height: 85vh; /* Занимает всю высоту экрана */
+        display: flex;
+        flex-direction: column;
+    }
 
-.container {
-    min-height: 95vh; /* Занимает всю высоту экрана */
-    display: flex;
-    flex-direction: column;
-}
+    /* Подвал */
+    footer {
+        margin-top: auto; /* Прижимает footer к низу */
+        text-align: center;
+        padding: 10px;
+        color: #333; /* Цвет текста подвала */
+        transition: color 0.3s ease; /* Плавный переход для цвета текста */
+    }
 
-footer {
-    margin-top: auto; /* Прижимает footer к низу */
-    text-align: center;
-    padding: 10px;
-}
+    /* Темная тема для подвала */
+    body.dark-theme footer {
+        color: #eee;
+    }
 
-html, body {  /* Добавлено: Установка высоты для html и body */
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
+    /* Форма */
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 5px;
+    }
 
-/* Стили для кнопки */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s; /* Плавный переход */
-}
+    /* Метка */
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
 
-button:hover {
-    background-color: #3e8e41;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень при наведении */
-}
+    /* Поля ввода */
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box; /* Важно для правильной ширины */
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Плавный переход */
+        background-color: #fff; /* Белый фон для полей ввода */
+        color: #333; /* Темный текст для полей ввода */
+    }
 
-/* Стили для ссылок */
-a {
-    color: #007bff; /* Цвет ссылки */
-    text-decoration: none; /* Убрать подчеркивание по умолчанию */
-    transition: color 0.3s, text-decoration 0.3s;
-}
+    /* Темная тема для полей ввода */
+    body.dark-theme input[type="text"],
+    body.dark-theme input[type="email"],
+    body.dark-theme textarea {
+        background-color: #444; /* Темный фон для полей ввода */
+        color: #eee; /* Светлый текст для полей ввода */
+        border-color: #555; /* Темная граница */
+    }
 
-a:hover {
-    color: #0056b3; /* Изменить цвет при наведении */
-    text-decoration: underline; /* Добавить подчеркивание при наведении */
-}
+    /* Текстовое поле */
+    textarea {
+        height: 150px;
+    }
 
-/* Общий стиль для элементов, которые нужно анимировать */
-.fade-in {
-    opacity: 0; /* Изначально скрываем элемент */
-    transform: translateY(20px); /* Сдвигаем элемент вниз */
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Анимация */
-}
+    /* Кнопка */
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Плавный переход */
+    }
 
-/* Класс, который добавляется элементу, когда он должен появиться */
-.fade-in.active {
-    opacity: 1; /* Делаем элемент видимым */
-    transform: translateY(0); /* Возвращаем элемент на исходную позицию */
-}
+    /* Кнопка при наведении */
+    button:hover {
+        background-color: #3e8e41;
+    }
+
+    /* Сообщение об успехе */
+    #successMessage {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        border-radius: 4px;
+        display: none;
+        text-align: center;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Плавный переход */
+    }
+
+    /* Сообщение об успехе в темной теме */
+    body.dark-theme #successMessage {
+        background-color: #444;
+        color: #eee;
+        border-color: #555;
+    }
+
     </style>
 </head>
 <body>
@@ -132,7 +178,7 @@ a:hover {
           <img class ="fade-in" id="logo" src="images/logo.png" alt="Terraria Logo">
         </a>
       </header>
-  
+  <div class="contact-item">
       <form id="contactForm">
         <label for="name">Имя:</label>
         <input type="text" id="name" name="name" required>
@@ -142,11 +188,15 @@ a:hover {
   
         <label for="message">Сообщение:</label>
         <textarea id="message" name="message" rows="4" required tabindex="0"></textarea>
-  
         <button class="fade-in" type="submit">Отправить</button>
+    </div>
   
-        <div id="successMessage" style="display: none;">Ваше сообщение отправлено. Скоро мы на него ответим!</div>
+       
+  
+        
       </form>
+      <div id="successMessage" style="display: none;">Ваше сообщение отправлено. Скоро мы на него ответим!</div>
+      <button class ="fade-in" id="theme-toggle">Сменить тему</button>
   
       <footer>
         <p>&copy; 2025 Мой сайт о Terraria</p>
@@ -158,6 +208,26 @@ a:hover {
         const form = document.getElementById('contactForm');
         const successMessage = document.getElementById('successMessage');
         const fadeInElements = document.querySelectorAll('.fade-in');
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const logo = document.getElementById('logo');
+          
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-theme');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-theme');
+                
+                if (body.classList.contains('dark-theme')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+
+        
 
 fadeInElements.forEach((element, index) => {
 setTimeout(() => {
